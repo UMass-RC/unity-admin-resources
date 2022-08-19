@@ -1,0 +1,9 @@
+#!/bin/bash
+# print the name of the most recent default-formatted slurm batch job output file
+# you can use this in backticks -> "vim `slatest`", "tail -f `slatest`"
+highest_version=$(printf '%s\n' slurm-*.out | sed -e 's/\..*//' -e 's/.*_//' | sort -n | tail -n1)
+if [ $highest_version == "slurm-*" ]; then
+    echo no sbatch output found!
+else
+    echo ${highest_version}.out
+fi

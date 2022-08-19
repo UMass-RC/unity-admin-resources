@@ -1,0 +1,4 @@
+#!/bin/bash
+for jobid in $(squeue -u `whoami` -o %i --noheader); do
+	scancel $jobid
+done

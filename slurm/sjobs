@@ -1,0 +1,19 @@
+#!/bin/bash
+# just an alias for squeue my own user
+# but, if there are any arguments, do it once per second
+# This is not the way I intended to write this, but
+# this is the path of least resistance struggling with bash syntax
+sjobs () {
+    squeue -u `whoami`
+    if [ $# -eq 0 ]; then 
+        return 0 
+    fi
+    echo ""
+    while true
+    do
+        sleep 1
+        squeue -u `whoami`
+        echo ""
+    done
+}
+
