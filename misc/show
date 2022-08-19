@@ -1,0 +1,12 @@
+#!/bin/bash
+# alias for tail -f, with support for second argument grep
+if [ $# -eq 0 ]; then
+    echo "tell me what to show!"
+    exit
+fi
+if [ !  -z "$2" ]; then # if second argument is null
+    tail -f $1 | grep --line-buffered $2
+else
+    tail -f $1
+fi
+

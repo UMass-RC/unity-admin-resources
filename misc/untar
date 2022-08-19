@@ -1,0 +1,14 @@
+#! /bin/bash
+# first argument: tarball
+# second argument: output directory
+if [ -z "$2" ] # if second argument is null
+then
+    tar -xvf $1
+else
+    if [ ! -d $2 ] # if output directory doesn't exist
+    then
+        mkdir $2
+    fi
+    # -C cd to the output directory and then do the rest
+    tar -xvf $1 -C $2
+fi
