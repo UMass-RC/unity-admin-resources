@@ -1,0 +1,63 @@
+#!/bin/csh
+setenv LMOD_ROOT                 "/modules/lmod/lmod"
+setenv LMOD_PKG                  "/modules/lmod/lmod/lmod"
+setenv LMOD_CMD                  "$LMOD_PKG/libexec/lmod"
+setenv LMOD_DIR                  "$LMOD_PKG/libexec"
+setenv MODULESHOME               "$LMOD_PKG"      
+setenv TARG_TITLE_BAR_PAREN      " "
+setenv LMOD_SETTARG_FULL_SUPPORT no
+
+if ( ! $?LMOD_SETTARG_CMD ) then
+  setenv LMOD_SETTARG_CMD :
+endif
+
+set SUPPORT_KSH = "no"
+
+if ( $SUPPORT_KSH == yes && ! $?__LMOD_SET_FPATH ) then
+    setenv __LMOD_SET_FPATH 1
+    setenv FPATH            `/modules/lmod/lmod/lmod/libexec/addto FPATH /modules/lmod/lmod/lmod/init/ksh_funcs`
+endif
+
+
+set prefix  = ""
+set midfix  = ""
+set postfix = ""
+set merge   = "&&"
+
+set histchar = \!
+if ( $?histchars) then
+  set histchar   = `echo $histchars | cut -c1`
+  if ( "$histchar" != '\!' ) then
+    set _histchars = $histchars
+    set prefix  = 'set _histchars = $histchars; unset histchars;'
+    set midfix  = '--localvar histchars=$_histchars'
+    set postfix = '&& set histchars = $_histchars'
+  endif
+endif
+
+if ($?tcsh) then
+  echo "alias module  $prefix'eval `$LMOD_CMD tcsh '$midfix $histchar'*` '$postfix $merge' eval `$LMOD_SETTARG_CMD -s csh`'"
+  alias module  $prefix'eval `$LMOD_CMD tcsh '$midfix $histchar'*` '$postfix $merge' eval `$LMOD_SETTARG_CMD -s csh`'
+else
+  alias module  $prefix'eval `$LMOD_CMD csh  '$midfix $histchar'*` '$postfix
+endif
+alias clearMT                                'eval `'$LMOD_DIR/clearLMOD_cmd --shell csh --simple'`'
+alias clearLmod  module --force purge $merge 'eval `'$LMOD_DIR/clearLMOD_cmd --shell csh --full $histchar'*' '`'
+
+alias ml      'eval `'$LMOD_DIR/ml_cmd' '$histchar'*`'
+
+setenv LMOD_VERSION '8.6.17'
+
+unset SUPPORT_KSH
+unset prefix
+unset midfix
+unset postfix
+unset histchar
+unset merge
+set echo_style=both  # this variable must be set for precmd in the settarg module to work!
+
+# Local Variables:
+# mode: shell-script
+# indent-tabs-mode: nil
+# end:
+

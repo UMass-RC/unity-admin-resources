@@ -1,0 +1,25 @@
+1c1
+< --linux-ubuntu20.04-x86_64/gcc@9.4.0-------------------------
+---
+> --linux-ubuntu20.04-cascadelake/gcc@9.4.0--------------------
+2a3
+> apptainer@1.0.2
+10d10
+< bc@1.07
+19d18
+< bubblewrap@0.6.1
+35d33
+< cuda@11.6.2
+60d57
+< freebayes@1.3.5
+101d97
+< hwloc@2.7.1
+120d115
+< libcap@2.64
+197,198d191
+< openmpi@4.1.3
+< openmpi@4.1.3
+203d195
+< parallel@20210922
+285d276
+< vcftools@0.1.14

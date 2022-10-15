@@ -1,0 +1,52 @@
+CPU_FAM=$(/modules/spack-latest/bin/spack python -c 'import archspec.cpu as cpu; print(cpu.host().family)')
+CPU_GENERIC=$(/modules/spack-latest/bin/spack arch -g)
+# this tells modified `module` function the location of readme file to print
+export LMOD_LIMITED_README=/modules/admin-resources/new-spack-demo/lmod-limited-view-printme.txt
+DEFAULT_DIRS=(
+    "/modules/modulefiles" 
+    "/modules/spack-latest/share/spack/lmod/linux-ubuntu20.04-$CPU_FAM/Core" 
+    "/modules/spack-latest/share/spack/lmod/linux-ubuntu20.04-$CPU_GENERIC/Core" 
+)
+HIERARCHY_PREFIX="/modules/spack-latest/share/spack/lmod/linux-ubuntu20.04-$CPU_FAM"
+HIERARCHY_DIRS=(
+    "intel-oneapi-mpi/2021.6.0-h3cppyo/Core"
+    "openmpi/4.1.3-s3qn45p/Core"
+    "intel/2021.4.0"
+)
+
+yes_or_no() {
+    case $1 in
+        [Yy]es) return 0 ;;
+        [Tt]rue) return 0;;
+        [Nn]o) return  1;;
+        [Ff]alse) return  1;;
+    esac
+}
+
+prepend_modulepath() {
+    # if $1 doesn't exist
+    if [ ! -d $1 ]; then
+        return 1
+    fi
+    # if $1 is already present in modulepath
+    if [[ $MODULEPATH =~ (^|:)$1($|:) ]] ; then
+        return 1
+    fi
+    if [ -z $MODULEPATH ]; then
+        export MODULEPATH="$1"
+    else
+        export MODULEPATH="$1:$MODULEPATH"
+    fi
+}
+
+for dir in ${DEFAULT_DIRS[@]}; do
+    prepend_modulepath $dir
+done
+
+if ! yes_or_no $LMOD_ENABLE_LIMITED_VIEW; then
+    for dir in ${HIERARCHY_DIRS[@]}; do
+        prepend_modulepath $HIERARCHY_PREFIX/$dir
+    done
+fi
+
+echo $MODULEPATH
