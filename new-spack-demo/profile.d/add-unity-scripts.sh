@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 prepend_path() {
     # if $1 doesn't exist

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 if [ ! -f ~/.unity-module ]; then
     echo "#!/bin/bash" > ~/.unity-module
 fi

@@ -1,17 +1,23 @@
-#!/bin/bash
+#!/bin/sh
+
 # if module() hasn't already been wrapped
 if ! type module_wrapped &> /dev/null; then
 
-    # get the definition of module() and put it in module_wrapped()
-    eval "$(echo "module_wrapped()"; declare -f module | tail -n +2)"
+    # https://stackoverflow.com/a/34177402/20140415
+    # rename `module` to `module_wrapped`
+    a="$(declare -f "module")" &&
+        eval "function module_wrapped ${a#*"()"}" &&
+        unset -f "module";
 
     # re-define module()
     module(){
+        # call original module() and remove the last line (empty line)
         module_wrapped $@
         if [ -f ~/.unity-module ]; then
             . ~/.unity-module
         fi
-        if [ ! $UNITY_MODULE_LMOD_DISABLE_HELP == "true" ]; then
+        if [ -z $UNITY_MODULE_LMOD_DISABLE_HELP ] ||
+                [[ ! $UNITY_MODULE_LMOD_DISABLE_HELP == "true" ]]; then
             help_file="/modules/admin-resources/production/res/unity-module-lmod-help.txt"
             if [ -f $help_file ]; then
                 cat $help_file

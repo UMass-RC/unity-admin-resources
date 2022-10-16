@@ -1,9 +1,10 @@
-#!/bin/bash
-
-# this tells modified `module` function the location of readme file to print
-export LMOD_LIMITED_README=/modules/admin-resources/new-spack-demo/lmod-limited-view-printme.txt
+#!/bin/sh
 
 SPACK_MOD_PREFIX="/modules/spack-latest/share/spack/lmod"
+
+DEFAULT_DIRS=(
+    "/modules/modulefiles"
+)
 
 yes_or_no() {
     case $1 in

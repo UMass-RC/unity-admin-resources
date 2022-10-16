@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 old_pwd=$PWD
 cd /modules/spack-latest/share/spack/lmod
 find . | # recursively list all files in /modules/spack-latest/share/spack/lmod
