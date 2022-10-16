@@ -7,19 +7,19 @@ export LMOD_LIMITED_README=/modules/admin-resources/new-spack-demo/lmod-limited-
 SPACK_MOD_PREFIX="/modules/spack-latest/share/spack/lmod"
 #SPACK_MOD_PREFIX="/modules/spack-0.18.1/share/spack/lmod"
 
-DEFAULT_DIRS=(
-    "/modules/modulefiles"
-)
+#DEFAULT_DIRS=(
+#   "/modules/modulefiles"
+#)
 
-COMPILER_DIRS=(
-    "gcc-9.4.0"
-    "intel/2021.4.0"
-)
+#COMPILER_DIRS=(
+#    "gcc-9.4.0"
+#    "intel/2021.4.0"
+#)
 
-PROVIDER_DIRS=(
-    "intel-oneapi-mpi/2021.6.0-h3cppyo"
-    "openmpi/4.1.3-s3qn45p"
-)
+#PROVIDER_DIRS=(
+#   "intel-oneapi-mpi/2021.6.0-h3cppyo"
+#    "openmpi/4.1.3-s3qn45p"
+#)
 
 yes_or_no() {
     case $1 in
@@ -72,13 +72,16 @@ if [[ $LMOD_ENABLE_LIMITED_VIEW ]]; then
         prepend_modulepath "$SPACK_MOD_PREFIX/$arch/gcc-9.4.0"
     done
 else
-    for arch in $(tac /etc/spack-cpu-arches); do
-        for comp_dir in ${COMPILER_DIRS[@]}; do
-            prepend_modulepath $SPACK_MOD_PREFIX/$arch/$comp_dir
-            for prov_dir in ${PROVIDER_DIRS[@]}; do
-                prepend_modulepath $SPACK_MOD_PREFIX/$arch/$prov_dir/$comp_dir
-            done
-        done
+#    for arch in $(tac /etc/spack-cpu-arches); do
+#        for comp_dir in ${COMPILER_DIRS[@]}; do
+#            prepend_modulepath $SPACK_MOD_PREFIX/$arch/$comp_dir
+#            for prov_dir in ${PROVIDER_DIRS[@]}; do
+#                prepend_modulepath $SPACK_MOD_PREFIX/$arch/$prov_dir/$comp_dir
+#            done
+#        done
+#    done
+    for dir in $(/modules/admin-resources/production/bin/unity-module-hierarchy); do
+        prepend_modulepath $dir
     done
 fi
 unset IFS
