@@ -58,7 +58,7 @@ unset MODULEPATH
 # if this is not a JupyterHub session
 # if there are no environment variables that contain substring JUPYTERHUB
 if ! env | grep JUPYTERHUB > /dev/null; then
-    echo "purging loaded modules..."
+    #echo "purging loaded modules..."
     module purge
 fi
 

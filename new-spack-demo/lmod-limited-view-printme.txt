@@ -1,9 +1,0 @@
-You are using the limited Lmod hierarchical view.
-The following modules expand your view:
-* intel-oneapi-mpi
-* openmpi
-* intel-oneapi-compilers
-
-You can disable the limited view with the following command (and put it in ~/.bashrc):
-export LMOD_ENABLE_LIMITED_VIEW=no; source /etc/profile
-

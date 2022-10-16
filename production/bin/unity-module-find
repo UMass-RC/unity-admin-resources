@@ -1,0 +1,26 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+    echo "not enough arguments! Which module would you like to find?"
+    exit 1
+fi
+
+if [ $# -gt 1 ]; then
+    echo "too many arguments! I can only find one module at a time!"
+    exit 1
+fi
+
+echo "modules found:"
+old_pwd=$PWD
+cd /modules/spack-latest/share/spack/lmod
+find . | # list modulefile tree
+grep -e \.lua$ | # filter for .lua files
+grep -e .*$1[^/]*/[^/]*$ | # filter for substring $1 in the second to last directory in the path
+awk '{print substr($1,3,length($1)-2)}' | # remove first two characters `./`
+awk '{print substr($1,0,length($0)-4)}' | # remove last four characters `.lua`
+grep --color -e $1[^/]*/[^/]*$ # highlight red $1/version
+cd $old_pwd
+
+echo
+echo "To learn more about the Unity module hierarchy, use the \`unity-module-hierarchy-help\` command."
+

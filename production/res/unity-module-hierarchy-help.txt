@@ -1,0 +1,10 @@
+hierarchy naming scheme:
+linux-ubuntu20.04-<architecture>/<compiler>/<compiler-version>/\e[1;31m<module-name>/<version>\e[0m
+linux-ubuntu20.04-<architecture>/<provider>/<provider-version>/<compiler>/\e[1;31m<module-name>/<version>\e[0m
+* Nested providers are possible.
+* The system compiler (gcc-9.4.0) does not have a <compiler-version> directory.
+* Hashes (random characters) in <provider-version> can be ignored.
+
+If a module is under a provider, you must first `module load` that provider to see it in `module avail`.
+If a module is under another architecture, you must first get a job on a node with that architecture.
+To switch your session to a compute node with arch 'x86_64_v4', use `srun --pty -C x86_64_v4 /bin/bash`.

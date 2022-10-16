@@ -1,0 +1,5 @@
+#!/bin/bash
+if [ ! -f ~/.unity-module ]; then
+    echo "#!/bin/bash" > ~/.unity-module
+fi
+echo 'export UNITY_MODULE_LMOD_DISABLE_HELP="false"' >> ~/.unity-module

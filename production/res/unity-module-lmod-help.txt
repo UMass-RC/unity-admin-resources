@@ -1,0 +1,3 @@
+To learn more about the Unity module hierarchy, use the `unity-module-hierarchy-help` command.
+To search for modules anywhere in the hierarchy, use the `unity-module-find` command.
+To surpress this output, use the `unity-module-lmod-disable-help` command.
