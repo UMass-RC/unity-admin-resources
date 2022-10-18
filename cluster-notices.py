@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# There is ANSI formatting for <strong>
+# if there was ANSI formatting for anything else, it would break
+
 import re
 import urllib.request, urllib.error
 import subprocess
@@ -13,14 +16,17 @@ url = 'https://unity.rc.umass.edu/api/notices/'
 response = urllib.request.urlopen(url)
 content = response.read().decode('UTF-8')
 
-content = content.replace('/n','')
+content = content.replace('/n',' ')
 content = content.replace('</a>','')
 content = content.replace('<p>','')
 content = content.replace('</p>','')
 content = content.replace('&nbsp;',' ')
-content = content.replace('<strong>','')
-content = content.replace('</strong>','')
-content = re.sub('<a[^>]*>', '', content)
+content = content.replace('<strong>','\e[1m') # html strong to ANSI bold
+content = content.replace('</strong>','\e[0m') # html strong to ANSI bold
+#content = content.replace('  ',' ')
+content = re.sub('<a[^>]*>', '', content) # remove hyperlinks but keep the displayed link text
+content = re.sub('\.', '. ', content) # add a space after each dot
+content = re.sub('[ ]+', ' ', content) # make multiple spaces into one space
 
 # `fmt` doesn't do a good job with the whole notice so I need to
 # isolate the date and title and `fmt` only the body
@@ -42,7 +48,8 @@ for notice in notices:
     format_body_process = subprocess.run(f"echo '{body_unformatted}' | fmt",
         capture_output=True, shell=True)
     body = str(format_body_process.stdout, 'UTF-8') # stdout is a bytes object
-    #print(f"{title}\t\t\t{date}")
     print(date)
-    print(title)
-    print(indent_string("  ", body))
+    # underlined bold
+    print("\033[4;1m{}\033[00m".format(title))
+    #print(title)
+    print(body)
