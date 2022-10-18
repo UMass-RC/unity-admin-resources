@@ -3,7 +3,11 @@
 echo "full Unity module hierarchy:"
 /modules/admin-resources/production/bin/unity-module-hierarchy
 echo
+# printf does colors, `echo -e` not supported in zsh
 printf "$(cat /modules/admin-resources/production/res/unity-module-hierarchy-help.txt)\n"
 echo
 echo "If you want to see the hierarchy but not the help, you can use the \`unity-module-hierarchy\` command."
 } | less -RSF
+# -R to show colors
+# -S to avoid wrapping lines
+# -F print normally if output fits on one screen
