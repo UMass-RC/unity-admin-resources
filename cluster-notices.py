@@ -23,7 +23,6 @@ content = content.replace('</p>','')
 content = content.replace('&nbsp;',' ')
 content = content.replace('<strong>','\e[1m') # html strong to ANSI bold
 content = content.replace('</strong>','\e[0m') # html strong to ANSI bold
-#content = content.replace('  ',' ')
 content = re.sub('<a[^>]*>', '', content) # remove hyperlinks but keep the displayed link text
 content = re.sub('\.', '. ', content) # add a space after each dot
 content = re.sub('[ ]+', ' ', content) # make multiple spaces into one space
