@@ -20,7 +20,7 @@ if ! type module_wrapped &> /dev/null; then
                 [[ ! $UNITY_MODULE_LMOD_DISABLE_HELP == "true" ]]; then
             help_file="/modules/admin-resources/production/res/unity-module-lmod-help.txt"
             if [ -f $help_file ]; then
-                cat $help_file
+                printf "$(cat $help_file)\n"
             fi
         fi
     }

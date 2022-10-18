@@ -1,3 +1,4 @@
-To search for modules anywhere in the hierarchy, use the `unity-module-find` command.
-To learn more about the Unity module hierarchy, use the `unity-module-hierarchy-help` command.
-To surpress this output, use the `unity-module-lmod-disable-help` command.
+Unity now uses the Lmod limited hierarchical view, some modules are hidden.
+To find a module not shown in `\e[1;94mmodule avail\e[0m`, use the `\e[1;94munity-module-find\e[0m` command.
+To learn more about the Unity module hierarchy, use the `\e[1;94munity-module-hierarchy-help\e[0m` command.
+To surpress this message, use the `\e[1;94munity-module-lmod-disable-help\e[0m` command.

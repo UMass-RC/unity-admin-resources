@@ -3,7 +3,7 @@ Default:
 linux-ubuntu20.04-<architecture>/gcc-9.4.0/\e[1;31m<module-name>/<version>\e[0m
 Non-Default:
 linux-ubuntu20.04-<architecture>/<compiler>/<compiler-version>/\e[1;31m<module-name>/<version>\e[0m
-linux-ubuntu20.04-<architecture>/<provider>/<provider-version>/<compiler>/\e[1;31m<module-name>/<version>\e[0m
+linux-ubuntu20.04-<architecture>/<provider>/<provider-version>/<compiler>/<compiler-version>/\e[1;31m<module-name>/<version>\e[0m
 * Nested providers are possible.
 * Hashes (random characters) in <provider-version> can be ignored.
 
@@ -17,7 +17,7 @@ This is to avoid conflicts between incompatible modules.
 You can find modules with `\e[1;94munity-module-find\e[0m`.
 The module you find will be under a non-default provider, compiler, or architecture.
 * If under a provider/compiler, `\e[1;94mmodule load\e[0m` that provider/compiler.
-* If under another architecture, get a slurm job on a node with that architecture.
+* If under an architecture, get a slurm job on a node with that architecture.
 * To switch your session to a node with arch 'x86_64_v4', use `\e[1;94msrun --pty -C x86_64_v4 /bin/bash\e[0m`.
 
 \e[1;4mLearn more\e[0m
@@ -25,3 +25,4 @@ https://lmod.readthedocs.io/en/latest/010_user.html#module-hierarchy
 https://lmod.readthedocs.io/en/latest/080_hierarchy.html
 
 If you want to see the hierarchy but not the help, you can use the `\e[1;94munity-module-hierarchy\e[0m` command.
+To exit help, press `\e[1;94mq\e[0m`

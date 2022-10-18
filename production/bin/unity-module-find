@@ -10,7 +10,7 @@ if [ $# -gt 1 ]; then
     exit 1
 fi
 
-echo "modules found:"
+echo "Modules found:"
 old_pwd=$PWD
 cd /modules/spack-latest/share/spack/lmod
 find . | # list modulefile tree
@@ -22,5 +22,5 @@ grep --color -e $1[^/]*/[^/]*$ # highlight red $1/version
 cd $old_pwd
 
 echo
-echo "To learn more about the Unity module hierarchy, use the \`unity-module-hierarchy-help\` command."
+printf "To learn more about the Unity module hierarchy, use the \`\e[1;94munity-module-hierarchy-help\e[0m\` command.\n"
 
