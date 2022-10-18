@@ -1,8 +1,9 @@
 #!/bin/sh
+{
 echo "full Unity module hierarchy:"
 /modules/admin-resources/production/bin/unity-module-hierarchy
 echo
 printf "$(cat /modules/admin-resources/production/res/unity-module-hierarchy-help.txt)\n"
 echo
-echo "If you want to see the Unity hierarchy but not the help, you can use the \`unity-module-hierarchy\` command."
-
+echo "If you want to see the hierarchy but not the help, you can use the \`unity-module-hierarchy\` command."
+} | less -RSF
